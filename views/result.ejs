@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exam Result</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/logo.png">
+</head>
+
+<body>
+
+    <div class="result">
+
+        <h1>Exam Result</h1>
+
+        <h2>Score:
+            <%= score %> /
+                <%= total %>
+        </h2>
+
+        <h2>Percentage:
+            <%= percentage %>%</h2>
+
+        <% if (percentage >= 70) { %>
+            <h3 style="color: green;">🎉 Excellent Pass</h3>
+            <% } else if (percentage >= 50) { %>
+                <h3 style="color: orange;">👍 Good Try</h3>
+                <% } else { %>
+                    <h3 style="color: red;">❌ Try Again</h3>
+                    <% } %>
+
+                        <a href="/register">Take Exam Again</a>
+
+    </div>
+
+</body>
+
+</html>

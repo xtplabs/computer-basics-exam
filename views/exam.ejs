@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>XTP Computer Basics Exam</title>
+    <link rel="icon" href="/logo.png">
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+
+<body>
+
+
+    <h1>XTP Computer Basics Exam</h1>
+
+
+    <form method="POST" action="/exam">
+
+
+        <input type="hidden" name="mode" value="<%= mode %>">
+
+        <input type="hidden" name="user_id" value="<%= student.id %>">
+
+
+
+        <% questions.forEach(function(q,index){ %>
+
+
+            <div class="question-slide" id="slide<%= index %>">
+
+
+                <h2>
+                    Question
+                    <%= index + 1 %> of
+                        <%= questions.length %>
+                </h2>
+
+
+
+                <h3>
+                    <%= q.question %>
+                </h3>
+
+
+
+                <label>
+<input 
+type="radio"
+name="<%= q.id %>"
+value="<%= q.a %>">
+
+<%= q.a %>
+</label>
+
+
+
+
+
+                <label>
+<input 
+type="radio"
+name="<%= q.id %>"
+value="<%= q.b %>">
+
+<%= q.b %>
+</label>
+
+
+
+
+
+                <label>
+<input 
+type="radio"
+name="<%= q.id %>"
+value="<%= q.c %>">
+
+<%= q.c %>
+</label>
+
+
+                <label>
+<input 
+type="radio"
+name="<%= q.id %>"
+value="<%= q.d %>">
+
+<%= q.d %>
+</label>
+
+
+
+            </div>
+
+
+            <% }) %>
+
+
+
+
+
+                <br>
+
+
+
+
+
+
+
+
+                <button type="button" onclick="nextQuestion()" id="nextBtn">
+
+Next
+
+</button>
+
+                <button type="button" onclick="previousQuestion()" id="prevBtn">
+
+                       Previous
+
+                </button>
+
+
+                <button type="submit" id="submitBtn">
+
+Submit Exam
+
+</button>
+
+
+
+    </form>
+
+
+
+
+
+
+    <script>
+        let current = 0;
+
+
+        const slides = document.querySelectorAll(".question-slide");
+
+
+
+        function showQuestion() {
+
+
+            slides.forEach(item => {
+
+                item.style.display = "none";
+
+            });
+
+
+
+            slides[current].style.display = "block";
+
+
+
+            document.getElementById("prevBtn").style.display =
+                current === 0 ? "none" : "inline-block";
+
+
+
+            document.getElementById("nextBtn").style.display =
+                current === slides.length - 1 ? "none" : "inline-block";
+
+
+
+            document.getElementById("submitBtn").style.display =
+                current === slides.length - 1 ? "inline-block" : "none";
+
+
+
+        }
+
+
+
+
+        function nextQuestion() {
+
+
+            let checked =
+                slides[current].querySelector(
+                    "input[type='radio']:checked"
+                );
+
+
+
+            if (!checked) {
+
+                alert("Select an answer first");
+
+                return;
+
+            }
+
+
+
+            if (current < slides.length - 1) {
+
+                current++;
+
+                showQuestion();
+
+            }
+
+
+        }
+
+
+
+
+
+        function previousQuestion() {
+
+
+            if (current > 0) {
+
+                current--;
+
+                showQuestion();
+
+            }
+
+
+        }
+
+
+
+
+        showQuestion();
+    </script>
+
+
+
+</body>
+
+</html>
